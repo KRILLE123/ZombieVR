@@ -6,7 +6,7 @@ public class zombie_movement : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    GameObject target;
+    public GameObject target;
     void Start()
     {
         
