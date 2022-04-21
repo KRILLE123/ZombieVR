@@ -8,26 +8,53 @@ public class Gun : MonoBehaviour
     public int gunFireRate;
     public int gunClip;
     public int gunMaxAmmo;
+    float lastFired = 0;
+    float startTime;
     // Start is called before the first frame update
     void Start()
     {
-        
+        lastFired = Time.time;
+    }
+
+    void Fire()
+    {
+        print(Time.time);
+        print(Time.time - lastFired);
+        if(Time.time - lastFired >= gunFireRate)
+        {
+            lastFired = Time.time;
+            GameObject.Find("handgun").GetComponent<Animator>().Play("Entry");
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+
+                if(hit.collider.CompareTag("zombie"))
+                {
+                    print("pang");
+                    hit.collider.GetComponent<Health>().Damage(gunDamage);
+                }
+            }
+
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.white);
-            Debug.Log("Did not Hit");
-        }
+        Fire();
+        //RaycastHit hit;
+        //// Does the ray intersect any objects excluding the player layer
+        //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        //{
+        //    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+        //    Debug.Log("Did Hit");
+        //}
+        //else
+        //{
+        //    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+        //    Debug.Log("Did not Hit");
+        //}
     }
 }
