@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class melee : MonoBehaviour
+public class Melee : MonoBehaviour
 {
     public int meleeDamage;
     public int maxForce;
@@ -20,9 +20,9 @@ public class melee : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        print("he");
+        print("collided");
 
-        if (collision.collider.tag == "zombie")
+        if (collision.collider.CompareTag("zombie"))
         {
             float totalForce = Mathf.Abs(collision.relativeVelocity.x) + Mathf.Abs(collision.relativeVelocity.y) + Mathf.Abs(collision.relativeVelocity.z);
             

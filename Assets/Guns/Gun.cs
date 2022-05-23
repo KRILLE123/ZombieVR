@@ -16,14 +16,14 @@ public class Gun : MonoBehaviour
         lastFired = Time.time;
     }
 
-    void Fire()
+    public void Fire()
     {
-        print(Time.time);
         print(Time.time - lastFired);
         if(Time.time - lastFired >= gunFireRate)
         {
             lastFired = Time.time;
             GameObject.Find("handgun").GetComponent<Animator>().Play("Entry");
+            print("hej");
             RaycastHit hit;
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
