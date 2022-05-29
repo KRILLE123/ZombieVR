@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookPos = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+        Vector3 lookPos = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookPos - transform.position), 1.5f * Time.deltaTime);
         Vector3 diff = Vector3.Normalize(target.transform.position - transform.position) * Time.deltaTime;
 

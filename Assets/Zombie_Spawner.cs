@@ -48,7 +48,7 @@ public class Zombie_Spawner : MonoBehaviour
         for (int i = 0; i < level; i++)
         {
             print("spawned");
-            GameObject loadedZombie = Instantiate(zombie, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject loadedZombie = Instantiate(zombie, new Vector3(-3.776f, 4.993f, 2.464f), Quaternion.identity);
             loadedZombie.GetComponent<Health>().health = 100;
             zombies.Add(loadedZombie);
         }
